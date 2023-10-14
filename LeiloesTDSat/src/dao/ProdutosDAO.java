@@ -48,7 +48,6 @@ public class ProdutosDAO {
         try {
             st = this.conn.prepareStatement(sql);
 
-            //st.setString(1,"%" + nome + "%");
             rs = st.executeQuery();    
             
             List<ProdutosDTO> lista = new ArrayList<>();

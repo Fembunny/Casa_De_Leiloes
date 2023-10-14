@@ -3,18 +3,18 @@ package forms;
 
 import beans.ProdutosDTO;
 import dao.ProdutosDAO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
+
 public class listagemVIEW extends javax.swing.JFrame {
+
     public listagemVIEW() {
         initComponents();
         listarProdutos();
     }
-    
-private final Object[] tableColumns = {"ID", "NOME", "CPF", "NASCIMENTO", "ENDEREÇO", "TELEFONE"}; 
-    DefaultTableModel tableModel = new DefaultTableModel(tableColumns, 0);
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -196,15 +196,14 @@ private final Object[] tableColumns = {"ID", "NOME", "CPF", "NASCIMENTO", "ENDER
             
             DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
             model.setNumRows(0);
-
-            List<ProdutosDTO> lista = produtosdao.listarProdutos();
             
-            for(int i = 0; i < lista.size(); i++){
+            List<ProdutosDTO> listagem = produtosdao.listarProdutos();
+            for(int i = 0; i < listagem.size(); i++){
                 model.addRow(new Object[]{
-                    lista.get(i).getId(),
-                    lista.get(i).getNome(),
-                    lista.get(i).getValor(),
-                    lista.get(i).getStatus()
+                    listagem.get(i).getId(),
+                    listagem.get(i).getNome(),
+                    listagem.get(i).getValor(),
+                    listagem.get(i).getStatus()
                 });
             }
         } catch (Exception e) {
