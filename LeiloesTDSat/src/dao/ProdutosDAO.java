@@ -33,11 +33,12 @@ public class ProdutosDAO {
             
             status = st.executeUpdate();
             
-            System.out.println("Produto salvo com sucesso");
+            JOptionPane.showMessageDialog(null, "Produto salvo com sucesso ✔", "Cadastro de produtos", JOptionPane.PLAIN_MESSAGE);
             return status;
         }
         catch(SQLException ex){
             System.out.println("Erro ao conectar - " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao salvar produto, tente novamente", "Cadastro de produtos", JOptionPane.PLAIN_MESSAGE);
             return ex.getErrorCode();
         }
     }
