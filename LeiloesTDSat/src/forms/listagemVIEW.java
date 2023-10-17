@@ -5,6 +5,7 @@ import beans.ProdutosDTO;
 import dao.ProdutosDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -125,12 +126,24 @@ public class listagemVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        String id = id_produto_venda.getText();
-        
-        ProdutosDAO produtosdao = new ProdutosDAO();
-        
-        //produtosdao.venderProduto(Integer.parseInt(id));
-        listarProdutos();
+        try{
+            ProdutosDAO produtosdao = new ProdutosDAO();
+            
+            int resposta =  produtosdao.venderProduto(Integer.parseInt(id_produto_venda.getText()));
+            if(resposta == 1){
+                JOptionPane.showMessageDialog(null,"Produto vendido");
+                
+                id_produto_venda.setText("");
+                
+                listarProdutos();
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Erro ao tentar vender produto");
+                id_produto_venda.setText("");
+            }
+        } catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao vender produto, tente novamente", "Venda de produtos", JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
