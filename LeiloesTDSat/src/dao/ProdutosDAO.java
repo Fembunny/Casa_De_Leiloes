@@ -86,6 +86,36 @@ public class ProdutosDAO {
         }
     }
     
+    public List<ProdutosDTO> listarProdutosVendidos(String status) { 
+        String sql = "SELECT * FROM Produtos WHERE status LIKE ?";
+        
+        try {
+            st = this.conn.prepareStatement(sql);
+            
+            st.setString(1,"%" + status + "%");
+            rs = st.executeQuery();    
+            
+            List<ProdutosDTO> lista = new ArrayList<>();
+            
+            while (rs.next()) {
+            ProdutosDTO produto = new ProdutosDTO();
+          
+            produto.setId(rs.getInt("id"));
+            produto.setNome(rs.getString("nome"));
+            produto.setValor(rs.getDouble("valor"));
+            produto.setStatus(rs.getString("status"));
+
+            lista.add(produto);                   
+            }                  
+            
+            return lista;   
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    
+    
     
     
         
